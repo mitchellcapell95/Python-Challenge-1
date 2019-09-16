@@ -11,6 +11,22 @@ candidate_Correy = 0
 candidate_Li = 0
 candidate_Tooley = 0
 
+
+list_of_candidates = []
+
+with open(csvpath, newline='') as csvfile:
+
+    csvreader = csv.reader(csvfile,delimiter=',')
+    if csv.Sniffer().has_header:
+        next(csvreader)
+
+    for row in csvreader:
+        if str(row[2]) not in list_of_candidates:
+            list_of_candidates.append(str(row[2]))
+            
+list_of_candidates_string = ', '.join(list_of_candidates)
+
+
 with open(csvpath, newline='') as csvfile:
 
     csvreader = csv.reader(csvfile,delimiter=',')
@@ -38,6 +54,7 @@ percentage_Li = round(((candidate_Li / counter) * 100),2)
 percentage_Tooley = round(((candidate_Tooley / counter) * 100),2)
 
         
+print("The candidates are: " + str(list_of_candidates_string))
 print("Total Votes: " + str(counter))
 print("Khan: " + str(percentage_Khan) + "% " + "(" + str(candidate_Khan) + ")")
 print("Correy: " + str(percentage_Correy) + "% " + "(" + str(candidate_Correy) + ")")
@@ -55,4 +72,3 @@ elif candidate_Li > candidate_Correy and candidate_Khan and candidate_Tooley:
     
 else:
     print("Winner: O'Tooley")
-    
